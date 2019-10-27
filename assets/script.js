@@ -2,10 +2,11 @@ $(document).ready(function(){
 
 var queryURL = "https://api.giphy.com/v1/gifs/search?q=";
 var api_key = "&api_key=1uizGhkNGhsf6Q6GQOndNQXoaeldkTl4";
-var animals = ["dogs", "cats", "birds", "hamsters", "monkeys", "snakes"];
+var animals = ["dog", "cat", "bird", "hamster", "monkey", "racoon"];
 var imageLimit = "&limit="+10;
 renderButtons();
 
+//render buttons
 function renderButtons (){
     $("#button-div").empty();
     for (var i = 0; i < animals.length; i++) {
@@ -17,6 +18,7 @@ function renderButtons (){
     }
 }
 
+//adding to array
 $("#add-animal").on("click",function(event){
     event.preventDefault();
     animals.push($("#animal-input").val().trim())
@@ -31,13 +33,11 @@ function displayContent(){
     $("#image-div").empty();
 
     var query = queryURL + $(this).attr("data-name") + api_key + imageLimit;
-    console.log(query);
     var stillImage;
     var animateImage;
     var imageRating;
     $.ajax({url: query, method: "GET"}).then(function(response){
 
-        console.log(response);
         for(var i = 0; i < response.data.length; i++)
         {
             stillImage = response.data[i].images.fixed_height_still.url;
